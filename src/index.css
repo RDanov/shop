@@ -33,3 +33,23 @@ nav {
 .card-content {
   flex-grow: 1;
 }
+
+.cart {
+  position: fixed;
+  cursor: pointer;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 5;
+  padding: 1rem;
+
+}
+@media (min-width: 767px) {
+  .cart {
+    top: 5rem;
+    bottom: unset;
+  }
+}
+
+.cart-quantity {
+
+}

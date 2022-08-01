@@ -8,12 +8,12 @@ function GoodsItem(props) {
             
          </div>
         <div className="card-content">
-            <span className="card-title">{name}</span>
+            <span className="card-title" style={{fontSize:'2rem'}}>{name}</span>
             <p>{description}</p>
         </div>
         <div className="card-action">
             <button className="btn">Купить</button>
-            <span className="right">{price}</span>
+            <span className="right">{price} $ </span>
         </div>
      </div> 
     );

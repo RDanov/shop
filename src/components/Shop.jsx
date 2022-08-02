@@ -4,11 +4,17 @@ import GoodsList from './GoodsList';
 
 import Preloader from './Preloader';
 import Cart from './Cart';
+import CartList from './CartList';
 
 function Shop() {
     const [goods, setGoods] = useState([]);
     const [loading, setLoading] = useState(true);
     const [order, setOrder] = useState([]);
+    const [isCartShow, setCartShow] = useState(false);  
+
+    const handleCartShow = () => {
+        setCartShow(!isCartShow);
+    };
 
 const addToCart = (item) => {
     const itemIndex = order.findIndex(orderItem => orderItem.id === item.id);
@@ -36,6 +42,12 @@ const addToCart = (item) => {
     
 };
 
+const removeFromCart = (id) => {
+    const newOrder = order.filter(element => element.id !== id);
+    setOrder(newOrder);
+
+}
+
 
     useEffect(function getGoods() {
         fetch(API_URL, {
@@ -52,8 +64,16 @@ const addToCart = (item) => {
 
 
     return <main className="container content">
-        <Cart quantity={order.length}/>
+        <Cart quantity={order.length} 
+        handleCartShow={handleCartShow}
+        
+        />
         {loading ? <Preloader /> : <GoodsList goods = {goods}  addToCart = {addToCart}/>}
+        {
+            isCartShow && <CartList order={order} 
+            handleCartShow={handleCartShow}
+            removeFromCart={removeFromCart}/>
+        }
     </main>
 }
 

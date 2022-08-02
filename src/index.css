@@ -50,6 +50,36 @@ nav {
   }
 }
 
-.cart-quantity {
+.cart-list {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50rem;
+  max-width: 90%;
+  animation: show 700ms ease-in-out;
+}
 
+.cart-close {
+  cursor: pointer;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: #fff;
+}
+
+.cart-item-delete {
+  cursor: pointer;
+
+}
+
+@keyframes show {
+  from {
+    top: 80%;
+    opacity: 0;
+  }
+  to {
+    top: 50%;
+    opacity: 1;
+  }
 }

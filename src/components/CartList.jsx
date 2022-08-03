@@ -4,6 +4,9 @@ function CartList(props) {
     const { 
         handleCartShow = Function.prototype,
         removeFromCart = Function.prototype,
+        incQuantity = Function.prototype,
+        decQuantity = Function.prototype,
+
         order = [], 
          
     } = props;
@@ -21,6 +24,8 @@ function CartList(props) {
             <CartItem 
             key={item.id} 
             removeFromCart={removeFromCart}
+            incQuantity={incQuantity}
+            decQuantity={decQuantity}
             {...item}/>
            )) : <li  className="collection-item ">Cart empty</li>
         }

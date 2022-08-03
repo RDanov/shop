@@ -48,6 +48,37 @@ const removeFromCart = (id) => {
 
 }
 
+const incQuantity = (itemID) => {
+    const newOrder = order.map(item => {
+        if(item.id === itemID) {
+            const newQuantity = item.quantity + 1;
+            return {
+                ...item,
+                quantity: newQuantity
+            }
+        } else return item
+    });
+    setOrder(newOrder);
+}
+
+const decQuantity = (itemID) => {
+    const newOrder = order.map(item => {
+        if(item.id === itemID) {
+            if(item.quantity == 0) {
+                return item
+            } else {
+                const newQuantity = item.quantity - 1;
+            return {
+                ...item,
+                quantity: newQuantity
+            }
+            }
+            
+        } else return item
+    });
+    setOrder(newOrder);
+}
+
 
     useEffect(function getGoods() {
         fetch(API_URL, {
@@ -72,7 +103,9 @@ const removeFromCart = (id) => {
         {
             isCartShow && <CartList order={order} 
             handleCartShow={handleCartShow}
-            removeFromCart={removeFromCart}/>
+            removeFromCart={removeFromCart}
+            incQuantity={incQuantity}
+            decQuantity={decQuantity}/>
         }
     </main>
 }

@@ -83,3 +83,9 @@ nav {
     opacity: 1;
   }
 }
+
+.cart-icons {
+  cursor: pointer;
+  vertical-align: middle;
+  
+}

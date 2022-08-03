@@ -4,11 +4,15 @@ function CartItem(props) {
         name,
         price,
         quantity,
-        removeFromCart = Function.prototype
+        removeFromCart = Function.prototype,
+        incQuantity =  Function.prototype,
+        decQuantity =  Function.prototype,
     } = props;
     return (
         <li  className="collection-item">
-            {name} x {quantity} = {price*quantity} $
+            {name} <i className="material-icons cart-icons" onClick={() => decQuantity(id)}>remove</i>
+             x {quantity}{' '} <i className="material-icons cart-icons" onClick={() => incQuantity(id)}>add</i> 
+             = {price*quantity} $
             <span className="secondary-content" 
             onClick={() => removeFromCart(id)}>
                 <i className="material-icons cart-item-delete">close</i>

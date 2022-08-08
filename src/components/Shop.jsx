@@ -1,22 +1,31 @@
-import {useState, useEffect} from 'react'
-import {API_KEY, API_URL} from '../config'
+import { useEffect, useContext } from 'react'
+import { API_KEY, API_URL } from '../config'
+
+import { ShopContext } from '../context'
 import GoodsList from './GoodsList';
 
 import Preloader from './Preloader';
 import Cart from './Cart';
 import CartList from './CartList';
+import Alert from './Alert';
 
 function Shop() {
-    const [goods, setGoods] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [order, setOrder] = useState([]);
-    const [isCartShow, setCartShow] = useState(false);  
+    const {goods, loading, order, setGoods, isCartShow, alertName} = useContext(ShopContext)
+    //const [goods, setGoods] = useState([]);
+    //const [loading, setLoading] = useState(true);
+    //const [order, setOrder] = useState([]);
+    //const [isCartShow, setCartShow] = useState(false); 
+    //const [alertName, setAlertName] = useState(''); 
 
-    const handleCartShow = () => {
+    /* const handleCartShow = () => {
         setCartShow(!isCartShow);
     };
 
-const addToCart = (item) => {
+    const closeAlert = () => {
+        setAlertName('');
+    } */
+
+/* const addToCart = (item) => {
     const itemIndex = order.findIndex(orderItem => orderItem.id === item.id);
     if(itemIndex < 0) {
          const newItem = {
@@ -38,8 +47,7 @@ const addToCart = (item) => {
 
         setOrder(newOrder);
     }
-   
-    
+   setAlertName(item.name);
 };
 
 const removeFromCart = (id) => {
@@ -64,7 +72,7 @@ const incQuantity = (itemID) => {
 const decQuantity = (itemID) => {
     const newOrder = order.map(item => {
         if(item.id === itemID) {
-            if(item.quantity == 0) {
+            if(item.quantity === 0) {
                 return item
             } else {
                 const newQuantity = item.quantity - 1;
@@ -77,7 +85,7 @@ const decQuantity = (itemID) => {
         } else return item
     });
     setOrder(newOrder);
-}
+} */
 
 
     useEffect(function getGoods() {
@@ -89,23 +97,29 @@ const decQuantity = (itemID) => {
         .then((response) => response.json())
         .then((data) => {
             data.featured && setGoods(data.featured);
-            setLoading(false);
         });
+        //eslint-disable-next-line
     }, []);
 
 
     return <main className="container content">
         <Cart quantity={order.length} 
-        handleCartShow={handleCartShow}
+        //handleCartShow={handleCartShow}
         
         />
-        {loading ? <Preloader /> : <GoodsList goods = {goods}  addToCart = {addToCart}/>}
+        {loading ? <Preloader /> : <GoodsList goods = {goods}  />}
         {
             isCartShow && <CartList order={order} 
-            handleCartShow={handleCartShow}
-            removeFromCart={removeFromCart}
-            incQuantity={incQuantity}
-            decQuantity={decQuantity}/>
+          //  handleCartShow={handleCartShow}
+         //   removeFromCart={removeFromCart}
+         //   incQuantity={incQuantity}
+          //  decQuantity={decQuantity}
+          />
+        }
+        {
+            alertName && <Alert name={alertName}
+         //   closeAlert = {closeAlert}
+            />
         }
     </main>
 }

@@ -1,13 +1,19 @@
+import { useContext } from "react";
+import { ShopContext} from '../context'
+
 function CartItem(props) {
     const {
         id,
         name,
         price,
         quantity,
-        removeFromCart = Function.prototype,
+        /* removeFromCart = Function.prototype,
         incQuantity =  Function.prototype,
-        decQuantity =  Function.prototype,
+        decQuantity =  Function.prototype, */
     } = props;
+
+const { removeFromCart, incQuantity, decQuantity} = useContext(ShopContext);
+
     return (
         <li  className="collection-item">
             {name} <i className="material-icons cart-icons" onClick={() => decQuantity(id)}>remove</i>
